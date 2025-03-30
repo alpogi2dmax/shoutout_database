@@ -17,6 +17,7 @@ with app.app_context():
         last_name='Yagami',
         profile_pic='https://i.imgur.com/q4IgIRx.png'
         )
+    user1.password_hash = 'password'
     users.append(user1)
     user2 = User(
         username='roronoazoro',
@@ -25,6 +26,7 @@ with app.app_context():
         last_name='Zoro',
         profile_pic='https://i.imgur.com/XcxCRIW.png'
     )
+    user2.password_hash = 'password'
     users.append(user2)
 
     print('Adding bird objects to transaction...')
