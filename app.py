@@ -1,10 +1,12 @@
+# app.py
+
 import os
 
 from flask import Flask, jsonify, make_response
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 
-from models import db, Bird
+from models import db, User
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
@@ -16,17 +18,10 @@ db.init_app(app)
 
 api = Api(app)
 
-class Birds(Resource):
+class Users(Resource):
 
     def get(self):
-        birds = [bird.to_dict() for bird in Bird.query.all()]
-        return make_response(jsonify(birds), 200)
+        users = [user.to_dict() for user in User.query.all()]
+        return make_response(jsonify(users), 200)
 
-api.add_resource(Birds, '/birds')
-
-class BirdByID(Resource):
-    def get(self, id):
-        bird = Bird.query.filter_by(id=id).first().to_dict()
-        return make_response(jsonify(bird), 200)
-
-api.add_resource(BirdByID, '/birds/<int:id>')
+api.add_resource(Users, '/users')
